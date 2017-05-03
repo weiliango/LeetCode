@@ -9,11 +9,10 @@ public class Solution {
 			if ( s[i] >= g[p] ) {
 				p++;
 				if ( p >= g.length) {
-					re
+					return g.length;
 				}
 			}
 		}
-
 		return p;
 	}
 }
