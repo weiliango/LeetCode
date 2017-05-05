@@ -9,7 +9,19 @@
  */
 public class Solution {
     public boolean isBalanced(TreeNode root) {
-    	if ( root == null) return true;
-    	return isBalanced(root.left) && isBalanced(root.right);  
+    	boolean[] res 	= new boolean[1];
+    	res[0] 			= true;
+
+    	helper(root, res);
+    	return res;
+    }
+    public int helper(TreeNode root, boolean[] res) {
+    	if ( root == null) return 0;
+    	left 	= isBalanced(root.left); 
+    	right 	= isBalanced(root.right);
+		
+		res[0] = res[0] && (Math.abs(left - right) <= 1);
+    	return Math.max(left, right) + 1;  
+    	
     }
 }
