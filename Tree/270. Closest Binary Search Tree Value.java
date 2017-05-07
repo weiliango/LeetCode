@@ -1,15 +1,16 @@
 public class Solution {
+	int closest;
 	public int closestValue(TreeNode root, double target) {
-		int closest = Math.abs(root.val - target);
-		int value 	= root.val;
-		TreeNode current = root;
-		while ( current != null ) {
-			if ( closest > Math.abs(current.val - target)) {
-				closest = Math.abs(current.val - target);
-				value 	= current.val;
-			}
+		closest = root.val;
+		return helper(root, target);
+	}
+	public int helper(TreeNode root, double target) {
+		if ( root == null ) {
+			return closest;
 		}
-
-		return value;
+		if ( Math.abs(root.val - target) < Math.abs(closest - target) ) {
+			closest = root.val;
+		}
+		return helper( root.val > target ? root.left : root.right, target);
 	}
 }
