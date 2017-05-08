@@ -1,3 +1,4 @@
+import java.util.*;
 public class Solution {
     public class Point {
         int x;
@@ -46,34 +47,26 @@ public class Solution {
 
         Queue<Point> q = new LinkedList<Point>();
         
-        b[p.x][p.y] = true;
         q.add(p);
         while ( !q.isEmpty() ) {
             Point current = q.poll();
+            b[current.x][current.y] = true;
 
             if ( current.x - 1 >= 0 ) {
-                if ( board[current.x - 1][current.y] == 'O' && !b[current.x-1][current.y]) {
+                if ( board[current.x - 1][current.y] == 'O' && !b[current.x-1][current.y])
                     q.add(new Point(current.x - 1, current.y));
-                    b[current.x-1][current.y] = true;
-                }
             }
             if ( current.x + 1 < m ) {
-                if ( board[current.x + 1][current.y] == 'O' && !b[current.x+1][current.y]) {
+                if ( board[current.x + 1][current.y] == 'O' && !b[current.x+1][current.y])
                     q.add(new Point(current.x + 1, current.y));
-                    b[current.x + 1][current.y] = true;
-                }
             }
             if ( current.y - 1 >= 0 ) {
-                if ( board[current.x][current.y-1] == 'O' && !b[current.x][current.y-1]) {
+                if ( board[current.x][current.y-1] == 'O' && !b[current.x][current.y-1])
                     q.add(new Point(current.x, current.y - 1));
-                    b[current.x][current.y - 1] = true;
-                }
             }
             if ( current.y + 1 < n ) {
-                if ( board[current.x][current.y+1] == 'O' && !b[current.x][current.y+1]) {
+                if ( board[current.x][current.y+1] == 'O' && !b[current.x][current.y+1])
                     q.add(new Point(current.x, current.y + 1));
-                    b[current.x][current.y + 1] = true;
-                }
             }
         }       
     }
