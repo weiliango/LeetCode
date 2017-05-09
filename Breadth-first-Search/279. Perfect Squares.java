@@ -1,4 +1,3 @@
-import java.util.*;
 public class Solution {
 	Queue <Integer> q = new LinkedList<Integer>();
 
@@ -13,7 +12,7 @@ public class Solution {
     public int bfs(int target, List<Integer> wordList) {
     	
     	q.clear();
-    	for ( int i = wordList.size()-1; i >= 0 ; i-- ) {
+    	for ( int i = 0; i < wordList.size() ; i++ ) {
     		q.add(wordList.get(i));
     	}
 
@@ -27,7 +26,7 @@ public class Solution {
     			return round;
     		}
 
-            for ( int i = wordList.size()-1; i >= 0 ; i-- ) {
+    		for ( int i = 0; i < wordList.size() ; i++ ) {
     			int sum = wordList.get(i) + current;
     			if ( !q.contains(sum) && sum <= target ) {
 					q.add(sum);    				
@@ -40,9 +39,5 @@ public class Solution {
     		}
     	}
     	return 0;
-    }
-    public static void main(String [] args) {
-        Solution s = new Solution();
-        System.out.println(s.numSquares(7196));
     }
 }
