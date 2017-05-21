@@ -12,8 +12,8 @@ public class Solution {
     		return;
     	}
 
-    	for ( int i = 1; i <= n ; i++ ) {
-    		if ( !list.contains(i) && i > last ) ) {
+    	for ( int i = last + 1; i <= n ; i++ ) {
+    		if ( !list.contains(i) ) ) {
     			list.add(i);
     			backtrack(res, n, k - 1, list, i);
     			list.remove(list.size()-1);
