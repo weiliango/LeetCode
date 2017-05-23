@@ -20,11 +20,16 @@ public class Solution {
 
     	for ( int i = index; i < s.length() && i <= index + 2; i++ ) {
     		String sub = s.substring(index, i + 1);
+    		if ( sub.length() > 1 && sub.charAt(0) == '0' ) {
+    			continue;
+    		}
     		if ( Integer.parseInt(sub) > 255 ) {
     			continue;
     		}
     		sb.append(sub);
     		backtrack(res, sb, level+1, i+1, s);
+    		if ( level != 3 )
+    		    sb.deleteCharAt(sb.length()-1);
     		sb.delete(sb.length() + index - i - 1, sb.length());
     	}
     }
