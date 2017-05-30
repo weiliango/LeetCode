@@ -1,27 +1,29 @@
 public class Solution {
     public int nthUglyNumber(int n) {
-    	if ( n < 6 ) {
-    		return n;
-    	}
-    	HashSet<Integer> set = new HashSet<Integer>();
-    	set.add(1);
-    	set.add(2);
-    	set.add(3);
-    	set.add(4);
-    	set.add(5);
-    	int count = 5;
-    	int next = 6;
-    	int res = 0;
-    	while ( count < n ) {
-    		if (  (next % 2 == 0 && set.contains(next/2)) 
-    			||(next % 3 == 0 && set.contains(next/3))
-    			||(next % 5 == 0 && set.contains(next/5))){
-    			set.add(next);
-    			res = next;
-    			count++;
+    	int[] ugly = new int[n+1];
+    	ugly[1] = 1;
+
+    	int idx2 = 1;
+    	int idx3 = 1;
+    	int idx5 = 1;
+
+    	int fac2 = 2;
+    	int fac3 = 3;
+    	int fac5 = 5;
+
+    	for ( int i = 2; i <= n ; i++ ) {
+    		int min = Math.min(Math.min(fac2, fac3), fac5);
+    		ugly[i] = min;
+    		if ( min == fac2 ) {
+    			fac2 = 2 * ugly[++idx2];
     		}
-    		next++;
-    	}  
-    	return res;
+    		if ( min == fac3 ) {
+    			fac3 = 3 * ugly[++idx3];
+    		}
+    		if ( min == fac5 ) {
+    			fac5 = 5 * ugly[++idx5];
+    		}
+    	}
+    	return ugly[n];
     }
 }
