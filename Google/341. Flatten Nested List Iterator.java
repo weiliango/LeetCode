@@ -69,21 +69,30 @@ public class NestedIterator implements Iterator<Integer> {
  * }
  */
 public class NestedIterator implements Iterator<Integer> {
+	Stack <Iterator<NestedInteger>> stack;
+	NestedInteger ni;
 
     public NestedIterator(List<NestedInteger> nestedList) {
-        
+        stack = new Stack<Iterator<NestedInteger>>();
+        stack.push(nestedList.iterator());
     }
 
     @Override
     public Integer next() {
-        
+        return ni.getInteger();
     }
 
     @Override
     public boolean hasNext() {
-        
+    	while (!stack.isEmpty()) {
+    		if (!stack.peek().hasNext()) stack.pop();
+    		else if((ni = stack.peek().next()).isInteger()) return true;
+    		else stack.push(ni.getList().iterator());
+    	}
+        return false;
     }
 }
+
 
 /**
  * Your NestedIterator object will be instantiated and called as such:
