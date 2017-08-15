@@ -46,3 +46,9 @@ public class Solution {
         return false;
     }
 }
+
+public class Solution {
+    public boolean isPossible(int[] nums) {
+        
+    }
+}

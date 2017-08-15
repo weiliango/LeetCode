@@ -8,32 +8,35 @@
  * }
  */
 public class Solution {
-    private Map<Integer, List<Integer>> map;
-    private int min = 0;
     public List<List<Integer>> verticalOrder(TreeNode root) {
-        map = new HashMap<>();
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+        int min = 0;
+        int max = 0;
         List<List<Integer>> res = new LinkedList<>();
         if(root == null) return res;
-        map.put(0, new LinkedList<Integer>(root.val));
-        traversal(root, 0);
-        while(map.containsKey(min)) {
-            res.add(map.get(min));
-            min++;
+        Queue<Integer> levels = new LinkedList<>();
+        Queue<TreeNode> nodes = new LinkedList<>();
+        levels.add(0);
+        nodes.add(root);
+        while(!nodes.isEmpty()) {
+            int level = levels.poll();
+            TreeNode curr = nodes.poll();
+            if(!map.containsKey(level))
+                map.put(level, new ArrayList<Integer>());
+            map.get(level).add(curr.val);
+            if(curr.left != null) {
+                levels.add(level-1);
+                nodes.add(curr.left);
+                min = Math.min(min, level-1);
+            }
+            if(curr.right != null) {
+                levels.add(level+1);
+                nodes.add(curr.right);
+                max = Math.max(max, level+1);
+            }
         }
+        for(int i = min; i <= max; i++)
+            res.add(map.get(i));
         return res;
-    }
-    
-    public void traversal(TreeNode root, int level) {
-        if(root.left != null) {
-            if(!map.containsKey(level - 1))
-                map.put(level - 1, new LinkedList<Integer>(root.left.val));
-            min = Math.min(min, level);
-        }
-        if(root.right != null) {
-            if(!map.containsKey(level - 1))
-                map.put(level - 1, new LinkedList<Integer>(root.right.val));
-        }
-        traversal(root.left, level - 1);
-        traversal(root.right, level + 1);
     }
 }
