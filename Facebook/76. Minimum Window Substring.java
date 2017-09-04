@@ -16,7 +16,7 @@ class Solution {
             if(map.containsKey(chs[i])) {
                 counter++;
                 map.put(chs[i], map.get(chs[i]) - 1);
-                if(counter >= t.length() && isValid(map)) {
+                if(map.get(chs[i]) < 0) {
                     for(int j = start + 1; j < i; j++) {
                         if(map.containsKey(chs[j])) {
                             if(map.get(chs[j]) == 0)
@@ -26,6 +26,8 @@ class Solution {
                         }
                         start++;
                     }
+                }
+                if(counter == t.length() && isValid(map)) {
                     String candidate = s.substring(start+1, i+1);
                     if(candidate.length() < ret.length())
                         ret = candidate;
